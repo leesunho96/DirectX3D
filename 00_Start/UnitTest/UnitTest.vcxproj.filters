@@ -3,9 +3,20 @@
   <ItemGroup>
     <ClCompile Include="stdafx.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Vertex\Vertex_Line.cpp">
+      <Filter>Vertex</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="Main.h" />
+    <ClInclude Include="Vertex\Vertex_Line.h">
+      <Filter>Vertex</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Vertex">
+      <UniqueIdentifier>{a72ab6ed-abff-44d3-9e72-319308aebe88}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
 </Project>
