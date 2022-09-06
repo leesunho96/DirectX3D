@@ -3,9 +3,9 @@
 
 void Vertex_Line::Initialize()
 {
-	shader = new Shader(L"01_Vertex.fx");
+	shader = new Shader(L"04_Vertex.fx");
 	vertices[0].Position = Vector3(0.0f, 0.0f, 0.0f);
-	vertices[1].Position = Vector3(0.0f, 1.0f, 0.0f);
+	vertices[1].Position = Vector3(1.0f, 1.0f, 0.0f);
 
 	//
 	D3D11_BUFFER_DESC desc;
@@ -40,9 +40,9 @@ void Vertex_Line::Render()
 	// 시작 지점. 해당 index 정점부터 Render.
 	UINT offset = 0;
 	D3D::GetDC()->IASetVertexBuffers(0, 1, &vertexBuffer, &stride, &offset);
-	D3D::GetDC()->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+	D3D::GetDC()->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_LINELIST);
 
-	shader->Draw(0, 0, 2);
+	shader->Draw(1, 0, 2);
 
 
 }
