@@ -152,6 +152,7 @@
     </ClCompile>
     <ClCompile Include="Vertex\RectDemo.cpp" />
     <ClCompile Include="Vertex\TriangleList.cpp" />
+    <ClCompile Include="Vertex\UserInterface.cpp" />
     <ClCompile Include="Vertex\Vertex_Line.cpp" />
     <ClCompile Include="Vertex\Vertex_Line2.cpp" />
   </ItemGroup>
@@ -160,6 +161,7 @@
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="Vertex\RectDemo.h" />
     <ClInclude Include="Vertex\TriangleList.h" />
+    <ClInclude Include="Vertex\UserInterface.h" />
     <ClInclude Include="Vertex\Vertex_Line.h" />
     <ClInclude Include="Vertex\Vertex_Line2.h" />
   </ItemGroup>

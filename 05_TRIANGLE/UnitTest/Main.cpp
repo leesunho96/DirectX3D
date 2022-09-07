@@ -6,6 +6,7 @@
 #include "Vertex/Vertex_Line2.h"
 #include "Vertex/TriangleList.h"
 #include "Vertex/RectDemo.h"
+#include "Vertex/UserInterface.h"
 
 
 void Main::Initialize()
@@ -13,7 +14,7 @@ void Main::Initialize()
 	//Push(new Vertex_Line());
 	//Push(new Vertex_Line2());
 	//Push(new TriangleList());
-	Push(new RectDemo());
+	Push(new UserInterface());
 }
 
 void Main::Ready()

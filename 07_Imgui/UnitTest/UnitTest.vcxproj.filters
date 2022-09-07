@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="stdafx.cpp" />
+    <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Vertex\Vertex_Line.cpp">
+      <Filter>Vertex</Filter>
+    </ClCompile>
+    <ClCompile Include="Vertex\Vertex_Line2.cpp">
+      <Filter>Vertex</Filter>
+    </ClCompile>
+    <ClCompile Include="Vertex\TriangleList.cpp">
+      <Filter>Vertex</Filter>
+    </ClCompile>
+    <ClCompile Include="Vertex\RectDemo.cpp">
+      <Filter>Vertex</Filter>
+    </ClCompile>
+    <ClCompile Include="Vertex\UserInterface.cpp">
+      <Filter>Vertex</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="Main.h" />
+    <ClInclude Include="Vertex\Vertex_Line.h">
+      <Filter>Vertex</Filter>
+    </ClInclude>
+    <ClInclude Include="Vertex\Vertex_Line2.h">
+      <Filter>Vertex</Filter>
+    </ClInclude>
+    <ClInclude Include="Vertex\TriangleList.h">
+      <Filter>Vertex</Filter>
+    </ClInclude>
+    <ClInclude Include="Vertex\RectDemo.h">
+      <Filter>Vertex</Filter>
+    </ClInclude>
+    <ClInclude Include="Vertex\UserInterface.h">
+      <Filter>Vertex</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Vertex">
+      <UniqueIdentifier>{a72ab6ed-abff-44d3-9e72-319308aebe88}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

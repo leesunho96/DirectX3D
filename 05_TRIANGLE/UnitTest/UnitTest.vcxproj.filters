@@ -15,6 +15,9 @@
     <ClCompile Include="Vertex\RectDemo.cpp">
       <Filter>Vertex</Filter>
     </ClCompile>
+    <ClCompile Include="Vertex\UserInterface.cpp">
+      <Filter>Vertex</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h" />
@@ -29,6 +32,9 @@
       <Filter>Vertex</Filter>
     </ClInclude>
     <ClInclude Include="Vertex\RectDemo.h">
+      <Filter>Vertex</Filter>
+    </ClInclude>
+    <ClInclude Include="Vertex\UserInterface.h">
       <Filter>Vertex</Filter>
     </ClInclude>
   </ItemGroup>
