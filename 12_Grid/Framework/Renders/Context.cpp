@@ -33,11 +33,6 @@ Context::Context()
 
 
 	position = D3DXVECTOR3(0, 0, -10);
-	D3DXVECTOR3 forward(0, 0, 1);
-	D3DXVECTOR3 right(1, 0, 0);
-	D3DXVECTOR3 up(0, 1, 0);
-
-	D3DXMatrixLookAtLH(&view, &position, &(position + forward), &up);
 }
 
 Context::~Context()
@@ -54,6 +49,14 @@ void Context::ResizeScreen()
 
 void Context::Update()
 {
+
+
+	ImGui::SliderFloat3("Position", position, -100, 100);
+	D3DXVECTOR3 forward(0, 0, 1);
+	D3DXVECTOR3 right(1, 0, 0);
+	D3DXVECTOR3 up(0, 1, 0);
+
+	D3DXMatrixLookAtLH(&view, &position, &(position + forward), &up);
 	
 }
 
