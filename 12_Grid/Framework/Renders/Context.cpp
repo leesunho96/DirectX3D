@@ -57,6 +57,7 @@ void Context::Update()
 	D3DXVECTOR3 up(0, 1, 0);
 
 	D3DXMatrixLookAtLH(&view, &position, &(position + forward), &up);
+
 	
 }
 
