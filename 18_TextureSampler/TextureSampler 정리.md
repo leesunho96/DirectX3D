@@ -36,3 +36,10 @@ DirectX 의  TextureSampler는 shader를 사용 할 때 텍스쳐의 샘플을 �
     - Sampler_Address_Clamp : 각 지점의 마지막 픽셀을 연장한다.
     - Sampler_Address_Border : Border Color로 색칠한다.
     - Sampler_Address_MirrorOnce : 한번만 거울로 뒤집은 형태로 출력하고, 나머지는 Wrap의 형태로 출력한다.
+
+- TextureSamplerFilter 영상
+[![Video Label](http://img.youtube.com/vi/Xg8V9tVoRjg/0.jpg)](https://youtu.be/Xg8V9tVoRjg)
+
+- TextureSamplerAddress 영상
+[![Video Label](http://img.youtube.com/vi/lQZepkxmUy8/0.jpg)](https://youtu.be/lQZepkxmUy8)
+
