@@ -30,6 +30,7 @@ void Terrain::Update()
 	shader->AsMatrix("World")->SetMatrix(world);
 	shader->AsMatrix("View")->SetMatrix(Context::Get()->View());
 	shader->AsMatrix("Projection")->SetMatrix(Context::Get()->Projection());
+	//shader->AsMatrix("Direction")->SetMatrix()
 }
 
 void Terrain::Render()

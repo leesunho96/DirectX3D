@@ -10,7 +10,7 @@ void HeightMapDemo::Initialize()
 
 	//terrain = new Terrain(shader, L"Terrain/Grayscale.png");
 	terrain = new Terrain(shader, L"Terrain/Gray256.png");
-	terrain->Pass(0);
+	terrain->Pass(1);
 }
 
 void HeightMapDemo::Destroy()
