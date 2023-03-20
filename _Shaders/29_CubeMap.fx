@@ -88,6 +88,7 @@ SamplerState LinearSampler
 
 float4 PS(VertexOutput input) : SV_Target
 {
+
     return CubeMap.Sample(LinearSampler, input.oPosition);
 }
 
