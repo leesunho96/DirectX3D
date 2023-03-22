@@ -1,67 +1,19 @@
-# Chap30 Readme
+# Chap31_CBUFFER
 
-1. SkySphere
+FrameWork::Buffers.h
+
+- D3D11_Buffer_Desc
+    - Desc.Usage를 이용하여 해당 버퍼에 대한 접근 권한 설정.
+    - D3D11_USAGE_IMMUTABLE :  외부에서 접근 불가능(CPU, GPU 모두 수정 불가능하며, 읽기만 가능.) : 해당 버퍼는 Rendering 용으로만 사용가능. 가장 속도가 빠르다.
+    - D3D11_USAGE_DYNAMIC : CPU에서는 수정 가능하지만, GPU에서는 수정 불가능 : CPU에서 정점 제어 가능. MAP 이용하여 GPU로 값 복사. 위 케이스의 경우 D3D11_Buffer_Desc: CPUAccessFlags = true로 해야 함. 그렇지 않으면 immutable 처리.
+    - D3D11_USAGE_DEFAULT : CPU는 읽기 전용, GPU는 수정 가능. CPU에서 처리 필요시 UpdateSubResource 함수 호출하여 처리 가능하지만, 예외적인 기능. UpdateSubResource는 GPU에 값을 복사하기 위해 Lock이용한 처리 → 해당 Lock에 대한 시점 처리 불가능, 해당 함수는 느리며, 주소 제어 불가능 하기 때문에 Map사용.
+    - D3D11_USAGE_STGING : CPU, GPU 모두 값 수정 가능 → 가장 느리다. D3D11_Buffer_Desc::CPUAccessFlags를 D3D11_CPU_ACCESS_READ(GPU에서 CPU로 데이터 전송 가능) | D3D11_CPU_ACCESS_WRITE(CPU에서 GPU로 데이터 전송 가능.) 처리.
     
-    in  Direct X
-    
-- 카메라 주위에 Rendering 하는 방식으로 구현
-- Camera의 위치를 Sphere의 중심으로 구현.→ 구가 카메라를 따라다님.
-- Shader→RSState에서 FrontCounterClockWise = true;(렌더링 방향 변경)
-- 
-    
-    ```glsl
-     DepthStencilState DepthStencilState_FALSE    
-        {    
-    	    DepthEnable = false;    
-        }    
-        …
-        technique11    
-        {    
-        pass0    
-        {    
-    	    …    
-    	    SetDepthStencilState(DepthStencilstaet, 0)    
-    	    …    
-        }    
-        }
-    
-    ```
-    
-- DepthStencil 제거한 상태로 SkySphere Render → 일반 Actor Render → DepthStencil 제거한 상태로 UI Render
-- → DepthStencil 제거한 상태로 Render시 깊이 판정 하지 않고, Render된 순서대로 Rendering. → UI가 묻히는 상황 방지.
-- 
-    
-    [https://youtu.be/cJisdnWKmuI](https://youtu.be/cJisdnWKmuI)
-    
-    ---
-    
-    ---
-    
-- Texture
-1. Texture1D
-    - x좌표만 존재.
-2. Texture2D
-    - X, Y 좌표 존재.
-3. Texture3D
-    - X, Y, Z좌표만 존재
-4. Teture2DARRAY
-    - Texture2D의 배열.
-    - Texture3D와는 Mip-Map의 차이만 존재.
-5. TextureCube
-    - 큐브를 펼친 형태로 texture 저장
-    - 
-    
-    ![Untitled](Chap30%20Readme%201e12d33c9a694302b0fbfe80ac87c20c/Untitled.png)
-    
-    - front : [z](https://www.notion.so/z-12499abe76f9464e923c668f720c122f)
-    - back : -z
-    - left : -x
-    - right : [x](https://www.notion.so/x-403f7a47e91e414eae88baf2cdcabb42)
-    - bottom : -y
-    - top ; +y
-    
-    이 큐브맵 렌더링시 원점으로부터 해당 pixel의 normal vector와의 교점을 sampling.
-    
-    [https://youtu.be/IpPx3ThmxuI](https://youtu.be/IpPx3ThmxuI)
-    
-    [https://youtu.be/NxCEJ4KhF8c](https://youtu.be/NxCEJ4KhF8c)
+- DeviceContext→Map( ID3D11Resource *pResource, UINT Subresource,  D3D11_MAP MapType, UINT MapFlags,*  D3D11_MAPPED_SUBRESOURCE *pMappedResource)
+    - pResource의 주소가 pMappedResource로 복사됨. 그 Mapping 형태는 D3D11_MAP 으로 정의 → GPU의 buffer가 복사된 값의 시작주소가 pMappedSubResource에 반환됨.
+    - 반환된 값 pMappedResource를 이용하여 memcpy시 원하는 값 읽어 들이기 가능.
+    - e.g. memcpy(subResource.pData, data, dataSize); // data를 subResource.pData로 dataSize만큼 복사 → 현재 원하는 data를 subResource.pData로 복사함. GPU에 값 복사해넣음.
+    - 해당 경우에는 MapType → D3D11_MAP_WRITE_DISCARD로 사용.
+    - 반대로 memcpy(data, subResource.pData, dataSize)시 GPU의 값을 CPU로 읽어들임.
+    - 해당 경우에는 D3D11_MAP_WRITE 사용.
+    - 이 함수는 GPU에 해당 영역이 묶여 버림. 따라서 사용 후, 바로 Unmap 해주지 않으면 프로그램 터짐.
