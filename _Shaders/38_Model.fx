@@ -47,8 +47,8 @@ float4 PS(VertexOutput input) : SV_Target
 {
     float NdotL = dot(normalize(input.Normal), -Direction);
     
-    //return DiffuseMap.Sample(LinearSampler, input.Uv) * NdotL;
-    return float4(1, 1, 1, 1) * NdotL;
+    return DiffuseMap.Sample(LinearSampler, input.Uv) * NdotL;
+    //return float4(1, 1, 1, 1) * NdotL;
 }
 
 technique11 T0
