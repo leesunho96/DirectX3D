@@ -14,6 +14,7 @@ public:
 private:
 	void ReadBoneData(aiNode* node, int index, int parent);
 	void ReadMeshData(aiNode* node, int bone);
+	void ReadSkinningData() const;
 	void WriteMeshData(wstring savePath);
 
 
@@ -47,3 +48,5 @@ private:
 	vector<struct asMesh*> meshes;
 	vector<struct asMaterial*> materials;
 };
+
+
