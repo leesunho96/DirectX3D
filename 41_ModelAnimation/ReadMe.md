@@ -1,18 +1,52 @@
-# Chap40 ModelMaterial
+# Chap41 SkinningModel
 
-aiTexture* aiScene::GetEmbededTexture(wstring Path);
-
-- 경로상에 존재하는 fbx 파일 안에 내장 텍스쳐 파일이 존재하면 해당 텍스쳐 파일 반환. 없는 경우 nullptr 반환.
-
-fbx파일은 해당 파일 내부에 여러가지 파일(texture, sound …) 저장 가능. 해당 fbx파일 내부의 파일 반환하는 함수.
-
-aiTexture→mHeight == 0
-
-- texture의 height가 없다 → 데이터가 byte 순서대로 입력되어 있다.
-- 해당 케이스의 경우 texture 크기만큼 그대로 파일로 저장.
-
-aiTexture→mHeight > 1
-
-- texture의 height 가 존재. 사실상 이론의 영역. 해당 케이스 거의 존재하지 않음.
-
-[https://www.youtube.com/watch?v=aXwVkW6J_VY&list=PLbo7gRk05HhjqJzGmj0rJsOUkkMhkIaJE&index=13](https://www.youtube.com/watch?v=aXwVkW6J_VY&list=PLbo7gRk05HhjqJzGmj0rJsOUkkMhkIaJE&index=13)
+- Skinning
+    - 모델의 각 정점은 Bone의 위치에 따라서 보정되어 피부를 덮는다.
+    - Animation의 변화에 따라 Bone의 상대 위치가 변경되고, 그에 따라 Mesh의 Vertex또한 변함.
+    - vertex
+        
+        ---
+        
+        - Position
+        - BlendIndices (float4)(x, y, z, w)
+        - BlendWeights (float4)(x, y, z, w)
+        
+        ---
+        
+        - BlendIndices : 정점이 영향을 받을 Bone의 번호.
+        - BlendWeights : 정점이 영향받을 본에 대한 가중치.
+    - Bone에 영향을 받아 Bone의 이동에 따라 Mesh 표면을 덮을 정점의 위치를 변경한다.
+        - 늘어날 부분은 늘어나고, 줄어들 부분은 줄어든다.
+    - 일반적으로  해당 정점 근처의 Bone 1~2개의 영향을 받음.
+    - e.g.
+        
+        ---
+        
+        - V0
+            - 1, 0, 0, 0
+            - 0, 1, 0 ,0
+            - 0, 0, 1, 0
+            - 2, 0, 0 ,1
+            
+        - V1
+            - 1, 0, 0, 0
+            - 0, 1, 0 ,0
+            - 0, 0, 1, 0
+            - 0, 2, 0, 1
+        - V.r
+            - BlendIndices : 0,     1
+            - BlendWeight : 0.5, 0.5
+            - → v0 * 0.5 +  v1 * 0.5
+        - 반드시 BlendWeights의 합은 1이어야 한다.
+    - 만약 더 많은 수의 Bone에 영향을 받게 하고 싶다면(blendIndices의 수가 4 이상이 되게 할 경우. 일반적인 경우는 아님.)
+        
+        ---
+        
+        - float4 BlendIndices0;
+        - float4 BlendIndices1;
+        - float4 BlendWeight0;
+        - float4 BlendWeight1;
+        
+        ---
+        
+    - 의 형태로 작성
