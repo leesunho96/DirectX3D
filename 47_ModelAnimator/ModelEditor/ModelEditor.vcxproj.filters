@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="Main.cpp" />
+    <ClCompile Include="stdafx.cpp" />
+    <ClCompile Include="Demo\ModelDemo.cpp">
+      <Filter>Demo</Filter>
+    </ClCompile>
+    <ClCompile Include="Writer\Converter.cpp">
+      <Filter>Writer</Filter>
+    </ClCompile>
+    <ClCompile Include="ExportFile.cpp" />
+    <ClCompile Include="Demo\AnimationDemo.cpp">
+      <Filter>Demo</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Main.h" />
+    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="Types.h" />
+    <ClInclude Include="Demo\ModelDemo.h">
+      <Filter>Demo</Filter>
+    </ClInclude>
+    <ClInclude Include="Writer\Converter.h">
+      <Filter>Writer</Filter>
+    </ClInclude>
+    <ClInclude Include="ExportFile.h" />
+    <ClInclude Include="Demo\AnimationDemo.h">
+      <Filter>Demo</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Demo">
+      <UniqueIdentifier>{f1c73234-823e-4aa4-8f9a-a85580054099}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Writer">
+      <UniqueIdentifier>{b6eab104-a3a1-47e4-8e5d-61eb46f89151}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
