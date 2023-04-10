@@ -15,14 +15,16 @@
     - textureArray : 행(keyFrame), 열(transforms).
     
     - ModelAnimator::CreateClipTransform()
-        - bone→Transform() : Global Transform
-        - invGlobal : inverse(bone→Transform) → 현재 bone의 부모 bone에 대한 상대 transform.
+        - bone→Transform() : Global Transform(in Actor's Local Transform) -> 자식 transform을 구하기 위한 부모 transform 저장 용도.
+        - invGlobal : inverse(bone→Transform) → 현재 bone의 부모 bone에 대한 상대 transform. -> 각 Bone의 부모 본에 대한 Relative Transform
         - animation→translation() : 부모 본에 대한 상대 transform.
             - 만약 해당 프레임에 적용될 transform이 없다면 정방행렬 적용.
         - parent = bone→transform(parentIndex); // 부모 bone의 global transform.
         - bones[b] = animation * parent // animation(relative) * parent(global) → Global Transform.
         - ClipTransforms[index].Transform[f][b] = invGlobal * bones[b]; // bones[b] : Global Transform, 만약 parent * bones[b] : Global Transform * global transform : 연산하는 좌표계가 다르기 때문에 예상외의 결과가 나올 것. → invGlobal * bones[b] 하여 Global 좌표계 연산으로 만들어줌.
     
+    
+
 - ID3DShaderResourceView
     - ID3D11Resource 싱속한 모든 객체에 대하여 Rendering Pipeline를 거치지 않은 관리 가능.
         - ID3D11Textire
