@@ -1,0 +1,95 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32901.215
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Framework", "Framework\Framework.vcxproj", "{CA334AE9-B7B1-4114-BC95-7C169F0A01CB}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "UnitTest", "UnitTest\UnitTest.vcxproj", "{B0DC2DAD-5725-4964-8C58-C925FFB48F65}"
+	ProjectSection(ProjectDependencies) = postProject
+		{CA334AE9-B7B1-4114-BC95-7C169F0A01CB} = {CA334AE9-B7B1-4114-BC95-7C169F0A01CB}
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_Shaders", "_Shaders", "{1A25703D-F3BC-4CA2-82EB-8DBDEA4E02E3}"
+	ProjectSection(SolutionItems) = preProject
+		..\_Shaders\00_Global.fx = ..\_Shaders\00_Global.fx
+		..\_Shaders\00_Light.fx = ..\_Shaders\00_Light.fx
+		..\_Shaders\00_Render.fx = ..\_Shaders\00_Render.fx
+		..\_Shaders\04_Vertex.fx = ..\_Shaders\04_Vertex.fx
+		..\_Shaders\06_Triangle.fx = ..\_Shaders\06_Triangle.fx
+		..\_Shaders\07_Rect.fx = ..\_Shaders\07_Rect.fx
+		..\_Shaders\09_World.fx = ..\_Shaders\09_World.fx
+		..\_Shaders\10_World.fx = ..\_Shaders\10_World.fx
+		..\_Shaders\15_Cube.fx = ..\_Shaders\15_Cube.fx
+		..\_Shaders\16_Texture.fx = ..\_Shaders\16_Texture.fx
+		..\_Shaders\18_TextureSampler.fx = ..\_Shaders\18_TextureSampler.fx
+		..\_Shaders\19_Terrain.fx = ..\_Shaders\19_Terrain.fx
+		..\_Shaders\20_DebugLine.fx = ..\_Shaders\20_DebugLine.fx
+		..\_Shaders\25_Mesh.fx = ..\_Shaders\25_Mesh.fx
+		..\_Shaders\29_CubeMap.fx = ..\_Shaders\29_CubeMap.fx
+		..\_Shaders\29_CubeSky.fx = ..\_Shaders\29_CubeSky.fx
+		..\_Shaders\29_CubeSky.fxo = ..\_Shaders\29_CubeSky.fxo
+		..\_Shaders\38_Model.fx = ..\_Shaders\38_Model.fx
+		..\_Shaders\45_Animation.fx = ..\_Shaders\45_Animation.fx
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ModelEditor", "ModelEditor\ModelEditor.vcxproj", "{A3EE8236-FEA5-4956-850D-415063163C57}"
+	ProjectSection(ProjectDependencies) = postProject
+		{CA334AE9-B7B1-4114-BC95-7C169F0A01CB} = {CA334AE9-B7B1-4114-BC95-7C169F0A01CB}
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_Models", "_Models", "{6CC57437-3450-4626-ABE9-26E414A86BC7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Kachujin", "Kachujin", "{4EB2A3BB-87ED-40AC-AA9F-3A44CB8483C3}"
+	ProjectSection(SolutionItems) = preProject
+		..\_Models\Kachujin\Mesh.mesh = ..\_Models\Kachujin\Mesh.mesh
+		..\_Models\Kachujin\Salsa Dancing.clip = ..\_Models\Kachujin\Salsa Dancing.clip
+		..\_Models\Kachujin\Sword And Shield Idle.clip = ..\_Models\Kachujin\Sword And Shield Idle.clip
+		..\_Models\Kachujin\Sword And Shield Run.clip = ..\_Models\Kachujin\Sword And Shield Run.clip
+		..\_Models\Kachujin\Sword And Shield Slash.clip = ..\_Models\Kachujin\Sword And Shield Slash.clip
+		..\_Models\Kachujin\Sword And Shield Walk.clip = ..\_Models\Kachujin\Sword And Shield Walk.clip
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CA334AE9-B7B1-4114-BC95-7C169F0A01CB}.Debug|x64.ActiveCfg = Debug|x64
+		{CA334AE9-B7B1-4114-BC95-7C169F0A01CB}.Debug|x64.Build.0 = Debug|x64
+		{CA334AE9-B7B1-4114-BC95-7C169F0A01CB}.Debug|x86.ActiveCfg = Debug|Win32
+		{CA334AE9-B7B1-4114-BC95-7C169F0A01CB}.Debug|x86.Build.0 = Debug|Win32
+		{CA334AE9-B7B1-4114-BC95-7C169F0A01CB}.Release|x64.ActiveCfg = Release|x64
+		{CA334AE9-B7B1-4114-BC95-7C169F0A01CB}.Release|x64.Build.0 = Release|x64
+		{CA334AE9-B7B1-4114-BC95-7C169F0A01CB}.Release|x86.ActiveCfg = Release|Win32
+		{CA334AE9-B7B1-4114-BC95-7C169F0A01CB}.Release|x86.Build.0 = Release|Win32
+		{B0DC2DAD-5725-4964-8C58-C925FFB48F65}.Debug|x64.ActiveCfg = Debug|x64
+		{B0DC2DAD-5725-4964-8C58-C925FFB48F65}.Debug|x64.Build.0 = Debug|x64
+		{B0DC2DAD-5725-4964-8C58-C925FFB48F65}.Debug|x86.ActiveCfg = Debug|Win32
+		{B0DC2DAD-5725-4964-8C58-C925FFB48F65}.Debug|x86.Build.0 = Debug|Win32
+		{B0DC2DAD-5725-4964-8C58-C925FFB48F65}.Release|x64.ActiveCfg = Release|x64
+		{B0DC2DAD-5725-4964-8C58-C925FFB48F65}.Release|x64.Build.0 = Release|x64
+		{B0DC2DAD-5725-4964-8C58-C925FFB48F65}.Release|x86.ActiveCfg = Release|Win32
+		{B0DC2DAD-5725-4964-8C58-C925FFB48F65}.Release|x86.Build.0 = Release|Win32
+		{A3EE8236-FEA5-4956-850D-415063163C57}.Debug|x64.ActiveCfg = Debug|x64
+		{A3EE8236-FEA5-4956-850D-415063163C57}.Debug|x64.Build.0 = Debug|x64
+		{A3EE8236-FEA5-4956-850D-415063163C57}.Debug|x86.ActiveCfg = Debug|Win32
+		{A3EE8236-FEA5-4956-850D-415063163C57}.Debug|x86.Build.0 = Debug|Win32
+		{A3EE8236-FEA5-4956-850D-415063163C57}.Release|x64.ActiveCfg = Release|x64
+		{A3EE8236-FEA5-4956-850D-415063163C57}.Release|x64.Build.0 = Release|x64
+		{A3EE8236-FEA5-4956-850D-415063163C57}.Release|x86.ActiveCfg = Release|Win32
+		{A3EE8236-FEA5-4956-850D-415063163C57}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{4EB2A3BB-87ED-40AC-AA9F-3A44CB8483C3} = {6CC57437-3450-4626-ABE9-26E414A86BC7}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6C4FFBD5-C7B4-434A-92BD-96B5BA0D3F69}
+	EndGlobalSection
+EndGlobal
