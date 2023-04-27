@@ -68,6 +68,7 @@ void SetTweenWorld(inout matrix world, VertexModel input)
     
     int clip[2];
     int currFrame[2];
+    
     int nextFrame[2];
     float time[2];
     
