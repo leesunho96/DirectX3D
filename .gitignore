@@ -1,5 +1,5 @@
 Skip to content
-Search or jump to¡¦
+Search or jump toï¿½ï¿½
 Pull requests
 Issues
 Marketplace
@@ -21,7 +21,7 @@ Insights
 Settings
 DirectX2D/.gitignore
 @leesunho96
-leesunho96 .gitignore ¹× .gitattributes¸¦ Ãß°¡ÇÏ¼¼¿ä.
+leesunho96 .gitignore ï¿½ï¿½ .gitattributesï¿½ï¿½ ï¿½ß°ï¿½ï¿½Ï¼ï¿½ï¿½ï¿½.
 Latest commit c1de346 on 13 Oct 2021
  History
  1 contributor
@@ -310,3 +310,4 @@ About
 **/Debug_Framwork/
 **/Debug_ModelEditor/
 **/Debug_UnitTest/
+*.recipe
