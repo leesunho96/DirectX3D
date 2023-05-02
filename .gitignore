@@ -309,4 +309,11 @@ About
 **/Debug/
 **/Debug_Framwork/
 **/Debug_ModelEditor/
+<<<<<<< Updated upstream
 **/Debug_UnitTest/
+=======
+**/Debug_UnitTest/
+*.recipe
+49_AnimationBlending/Debug_Framework/Framework.lib.recipe
+49_AnimationBlending/Debug_ModelEditor/ModelEditor.exe.recipe
+>>>>>>> Stashed changes
