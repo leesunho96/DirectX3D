@@ -1,5 +1,9 @@
 Skip to content
+<<<<<<< DIR-36-Chap-51
 Search or jump to  
+=======
+Search or jump to��
+>>>>>>> main
 Pull requests
 Issues
 Marketplace
@@ -21,7 +25,11 @@ Insights
 Settings
 DirectX2D/.gitignore
 @leesunho96
+<<<<<<< DIR-36-Chap-51
 leesunho96 .gitignore    .gitattributes    ?  ?   .
+=======
+leesunho96 .gitignore �� .gitattributes�� �߰��ϼ���.
+>>>>>>> main
 Latest commit c1de346 on 13 Oct 2021
  History
  1 contributor
@@ -310,4 +318,8 @@ About
 **/Debug_Framwork/
 **/Debug_ModelEditor/
 **/Debug_UnitTest/
+<<<<<<< DIR-36-Chap-51
 *.recipe
+=======
+*.recipe
+>>>>>>> main
