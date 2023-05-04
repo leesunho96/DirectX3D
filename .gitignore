@@ -1,5 +1,5 @@
 Skip to content
-Search or jump to…
+Search or jump to  
 Pull requests
 Issues
 Marketplace
@@ -21,7 +21,7 @@ Insights
 Settings
 DirectX2D/.gitignore
 @leesunho96
-leesunho96 .gitignore 및 .gitattributes를 추가하세요.
+leesunho96 .gitignore    .gitattributes    ?  ?   .
 Latest commit c1de346 on 13 Oct 2021
  History
  1 contributor
@@ -309,11 +309,5 @@ About
 **/Debug/
 **/Debug_Framwork/
 **/Debug_ModelEditor/
-<<<<<<< Updated upstream
-**/Debug_UnitTest/
-=======
 **/Debug_UnitTest/
 *.recipe
-49_AnimationBlending/Debug_Framework/Framework.lib.recipe
-49_AnimationBlending/Debug_ModelEditor/ModelEditor.exe.recipe
->>>>>>> Stashed changes
