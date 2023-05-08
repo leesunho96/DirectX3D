@@ -1,77 +1,24 @@
-# Chap 52 Instancing Skeletal Mesh
+# Chap54~55 Framework
 
-- Shader
-    - Header 중복 Include시 변수 중복 발생 error.
-    - Shader에서의 Include는 단순한 코드 치환.
-    - 동일한 Rendering Pipeline일 시, structure 가 include되어 있지 않더라도, 참조 가능.
-        - 하나의 렌더링 파이프라인을 공유 할 시, 명시적으로 include 하지 않더라도, 두개의 셰이더는 영역을 공유함.
-    
-- Instancing
-    - Texture화 하여 데이터를 전달.
-    - Instance Buffer → World.
-        - 각 칸 : Bone Index
-        - 행 : Instance 번호.
-        - 열 : Bone의 정보.
-        - 250 X 500 X 64 byte → Texture화 필요.
-        
-        ```cpp
-        void ModelRender::CreateTexture()
-        {
-        	D3D11_TEXTURE2D_DESC desc;
-        	ZeroMemory(&desc, sizeof(D3D11_TEXTURE2D_DESC));
-        	desc.Width = MAX_MODEL_TRANSFORMS * 4;
-        	desc.Height = MAX_MODEL_INSTANCE;
-        	desc.ArraySize = 1;
-        	desc.Format = DXGI_FORMAT_R32G32B32A32_FLOAT; // 한 픽셀당 16byte. 하나의 
-        	desc.Usage = D3D11_USAGE_DYNAMIC;
-        	desc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
-        	desc.BindFlags = D3D11_BIND_SHADER_RESOURCE;
-        	desc.MipLevels = 1;
-        	desc.SampleDesc.Count = 1;
-        
-        	Matrix bones[MAX_MODEL_TRANSFORMS];
-        
-        	for (UINT i = 0; i < MAX_MODEL_INSTANCE; i++)
-        	{
-        		for (UINT b = 0; b < model->BoneCount(); b++)
-        		{
-        			ModelBone* bone = model->BoneByIndex(b);
-        
-        			Matrix parent;
-        			int parentIndex = bone->ParentIndex();
-        
-        			if(parentIndex < 0)
-        				D3DXMatrixIdentity(&parent);
-        			else
-        				parent = bones[parentIndex];
-        
-        			Matrix matrix = bone->Transform();
-        			bones[b] = parent;
-        
-        			boneTransforms[i][b] = matrix * bones[b];
-        		} // for(b)
-        	} // for(i)
-        
-        	D3D11_SUBRESOURCE_DATA subResource;
-        	subResource.pSysMem = boneTransforms;
-        	subResource.SysMemPitch = MAX_MODEL_TRANSFORMS * sizeof(Matrix);
-        	subResource.SysMemSlicePitch = MAX_MODEL_TRANSFORMS * sizeof(Matrix) * MAX_MODEL_INSTANCE;
-        
-        	Check(D3D::GetDevice()->CreateTexture2D(&desc, &subResource, &texture));
-        
-        	D3D11_SHADER_RESOURCE_VIEW_DESC srvDesc;
-        	ZeroMemory(&srvDesc, sizeof(D3D11_SHADER_RESOURCE_VIEW_DESC));
-        	srvDesc.ViewDimension = D3D11_SRV_DIMENSION_TEXTURE2D;
-        	srvDesc.Texture2D.MipLevels = 1;
-        	srvDesc.Format = desc.Format;
-        
-        	Check(D3D::GetDevice()->CreateShaderResourceView(texture, &srvDesc, &srv));
-        
-        	for (auto mesh : model->Meshes())
-        	{
-        		mesh->TransformsSRV(srv);
-        	}
-        }
-        ```
-        
-        [https://www.youtube.com/watch?v=yFNjg1Q7KM4&list=PLbo7gRk05HhjqJzGmj0rJsOUkkMhkIaJE&index=17](https://www.youtube.com/watch?v=yFNjg1Q7KM4&list=PLbo7gRk05HhjqJzGmj0rJsOUkkMhkIaJE&index=17)
+- Process
+    - 실행 파일 단위
+    - multi process
+        - 프로세스간 데이터 공유에 문제 발생
+            - IPC를 이용한 방식으로 진행.
+                - 공유 메모리
+                - 메세지
+                - pipeline
+            - IPC는 기본적으로 Interrupt 발생
+                - I/O는 기본적으로 Interrupt.
+                    - Cpu를 제외한 나머지 장치와의 값 이동은 Interrupt.
+                    - sleep함수 또한 함수적으로 interrupt 발생.
+                - hard disk에 입출력을 이용하여 메세지 저장.
+                - multi-thread 환경으로 변화
+- Thread
+    - 기본적으로는 최소한의 실행 가능한 단위로 나누어 진행.
+    - 일반적인 프로그래밍 환경에서는 함수 단위로 실행.
+    - 동기 Thread
+        - 하나의 thread 동작
+        - 타 Thread가 기존 thread와 동기화 하여 진행.
+    - 비동기 Thread
+        - Thread간의 순서 관계 없이 진행.
