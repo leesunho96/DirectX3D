@@ -38,6 +38,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_Shaders", "_Shaders", "{1A
 		..\_Shaders\53_InstancingAnimation.fx = ..\_Shaders\53_InstancingAnimation.fx
 		..\_Shaders\55_Render.fx = ..\_Shaders\55_Render.fx
 		..\_Shaders\60_RawBuffer.fx = ..\_Shaders\60_RawBuffer.fx
+		..\_Shaders\62_Render2D.fx = ..\_Shaders\62_Render2D.fx
+		..\_Shaders\62_TextureBuffer.fx = ..\_Shaders\62_TextureBuffer.fx
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ModelEditor", "ModelEditor\ModelEditor.vcxproj", "{A3EE8236-FEA5-4956-850D-415063163C57}"

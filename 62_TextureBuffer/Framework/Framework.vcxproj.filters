@@ -148,6 +148,9 @@
     <ClCompile Include="Meshes\MeshRender.cpp">
       <Filter>Meshes</Filter>
     </ClCompile>
+    <ClCompile Include="Renders\Render2D.cpp">
+      <Filter>Renders</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Renders\Context.h">
@@ -276,6 +279,9 @@
     </ClInclude>
     <ClInclude Include="Meshes\MeshRender.h">
       <Filter>Meshes</Filter>
+    </ClInclude>
+    <ClInclude Include="Renders\Render2D.h">
+      <Filter>Renders</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

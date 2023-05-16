@@ -30,7 +30,8 @@
 //#include "DirectCompute/ThreadDemo.h"
 //#include "Instancing/InstancingDemo.h"
 
-#include "DirectCompute/RawBufferDemo.h"
+//#include "DirectCompute/RawBufferDemo.h"
+#include "DirectCompute/TextureBufferDemo.h"
 void Main::Initialize()
 {
 	//Push(new Vertex_Line());
@@ -42,10 +43,10 @@ void Main::Initialize()
 	//Push(new TextureSamplerDemo());
 
 	//Push(new CubeSkyDemo());
-	//Push(new ThreadDemo());
+	//Push(new ThreadDemo());s
 	//Push(new InstancingDemo());
 
-	Push(new RawBufferDemo());
+	Push(new TextureBufferDemo());
 }
 
 void Main::Ready()

@@ -147,6 +147,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="DirectCompute\RawBufferDemo.cpp" />
+    <ClCompile Include="DirectCompute\TextureBufferDemo.cpp" />
     <ClCompile Include="DirectCompute\ThreadDemo.cpp" />
     <ClCompile Include="Instancing\InstancingDemo.cpp" />
     <ClCompile Include="Main.cpp" />
@@ -177,6 +178,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DirectCompute\RawBufferDemo.h" />
+    <ClInclude Include="DirectCompute\TextureBufferDemo.h" />
     <ClInclude Include="DirectCompute\ThreadDemo.h" />
     <ClInclude Include="Instancing\InstancingDemo.h" />
     <ClInclude Include="Main.h" />

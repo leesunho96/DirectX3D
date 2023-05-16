@@ -75,6 +75,9 @@
     <ClCompile Include="DirectCompute\RawBufferDemo.cpp">
       <Filter>DirectCompute</Filter>
     </ClCompile>
+    <ClCompile Include="DirectCompute\TextureBufferDemo.cpp">
+      <Filter>DirectCompute</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h" />
@@ -149,6 +152,9 @@
       <Filter>DirectCompute</Filter>
     </ClInclude>
     <ClInclude Include="DirectCompute\RawBufferDemo.h">
+      <Filter>DirectCompute</Filter>
+    </ClInclude>
+    <ClInclude Include="DirectCompute\TextureBufferDemo.h">
       <Filter>DirectCompute</Filter>
     </ClInclude>
   </ItemGroup>
