@@ -85,6 +85,8 @@ MeshOutput VS_Model(VertexModel input)
 #define MAX_MODEL_KEYFRAMES 500
 #define MAX_MODEL_INSTANCE 500
 
+#define MODEL_CLIP_SIZE MAX_MODEL_TRANSFORMS * MAX_MODEL_KEYFRAMES
+
 //cbuffer CB_Bone
 //{
 //    matrix BoneTransforms[MAX_MODEL_TRANSFORMS];
