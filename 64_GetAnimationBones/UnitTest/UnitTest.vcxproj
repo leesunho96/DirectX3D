@@ -146,10 +146,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="DirectCompute\GetAnimationBoneDemo.cpp" />
     <ClCompile Include="DirectCompute\RawBufferDemo.cpp" />
     <ClCompile Include="DirectCompute\TextureBufferDemo.cpp" />
     <ClCompile Include="DirectCompute\ThreadDemo.cpp" />
     <ClCompile Include="Instancing\InstancingDemo.cpp" />
+    <ClCompile Include="Instancing\InstancingFrameworkDemo.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Mesh\CubeDemo.cpp" />
     <ClCompile Include="Mesh\MeshDemo.cpp" />
@@ -177,10 +179,12 @@
     <ClCompile Include="Vertex\Index_Demo.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="DirectCompute\GetAnimationBoneDemo.h" />
     <ClInclude Include="DirectCompute\RawBufferDemo.h" />
     <ClInclude Include="DirectCompute\TextureBufferDemo.h" />
     <ClInclude Include="DirectCompute\ThreadDemo.h" />
     <ClInclude Include="Instancing\InstancingDemo.h" />
+    <ClInclude Include="Instancing\InstancingFrameworkDemo.h" />
     <ClInclude Include="Main.h" />
     <ClInclude Include="Mesh\CubeDemo.h" />
     <ClInclude Include="Mesh\MeshDemo.h" />

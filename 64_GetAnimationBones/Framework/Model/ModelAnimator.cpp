@@ -5,7 +5,6 @@ ModelAnimator::ModelAnimator(Shader* shader)
 	: shader(shader)
 {
 	model = new Model();
-	
 
 	frameBuffer = new ConstantBuffer(&tweenDesc, sizeof(TweenDesc) * MAX_MODEL_INSTANCE);
 	sFrameBuffer = shader->AsConstantBuffer("CB_TweenFrame");
@@ -14,6 +13,20 @@ ModelAnimator::ModelAnimator(Shader* shader)
 	sBlendBuffer = shader->AsConstantBuffer("CB_BlendFrame");
 
 	instanceBuffer = new VertexBuffer(worlds, MAX_MODEL_INSTANCE, sizeof(Matrix), 1, true);
+
+	computeShader = new Shader(L"63_GetAnimationBone.fx");
+	computeAttachBuffer = new ConstantBuffer(&attachDesc, sizeof(AttachDesc));
+
+	sInputSRV = computeShader->AsSRV("Input");
+	sOutputUAV = computeShader->AsUAV("Output");
+
+	sComputeAttachBuffer = computeShader->AsConstantBuffer("CB_AttachBone");
+	sComputeTweenBuffer = computeShader->AsConstantBuffer("CB_TweenFrame");
+	sComputeBlendBuffer = computeShader->AsConstantBuffer("CB_BlendFrame");
+
+
+
+
 }
 
 ModelAnimator::~ModelAnimator()
@@ -29,6 +42,15 @@ ModelAnimator::~ModelAnimator()
 	SafeDelete(blendBuffer);
 
 	SafeDelete(instanceBuffer);
+
+
+	SafeDelete(computeShader);
+	SafeDelete(computeBuffer);
+
+	SafeDeleteArray(csInput);
+	SafeDeleteArray(csOutput);
+
+	SafeDelete(computeAttachBuffer);
 }
 
 void ModelAnimator::Update()
@@ -383,4 +405,36 @@ void ModelAnimator::CreateClipTransform(UINT index)
 			
 		}// for(b)
 	}//for(f)
+}
+
+void ModelAnimator::CreateComputeBuffer()
+{
+	UINT clipCount = model->ClipCount();
+	UINT inSize = clipCount * MAX_MODEL_KEYFRAMES *MAX_MODEL_TRANSFORMS;
+	UINT outSize = MAX_MODEL_INSTANCE;
+
+	csInput = new CS_InputDesc[inSize];
+
+	UINT count = 0;
+
+	for (UINT clipIndex = 0; clipIndex < clipCount; clipIndex++)
+	{
+		for (UINT frameIndex = 0; frameIndex < MAX_MODEL_KEYFRAMES; frameIndex++)
+		{
+			for (UINT boneIndex = 0; boneIndex < MAX_MODEL_TRANSFORMS; boneIndex++)
+			{
+				csInput[count].Bone = clipTransforms[clipIndex].Transform[frameIndex][boneIndex];
+				count++;
+			} // for boneIndex
+		} // for frameIndex
+	}// clipIndex
+
+	computeBuffer = new StructuredBuffer(csInput, sizeof(CS_InputDesc), sizeof(CS_OutputDesc), outSize);
+
+	csOutput = new CS_OutputDesc[outSize];
+
+	for (UINT i = 0; i < outSize; i++)
+	{
+		D3DXMatrixIdentity(&csOutput[i].Result);
+	}
 }

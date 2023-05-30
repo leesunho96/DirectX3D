@@ -1,5 +1,4 @@
 #pragma once
-
 class ModelAnimator
 {
 public:
@@ -48,6 +47,8 @@ private:
 	 * invGlobal * animation.Transform : actor에 대한 해당 bone의 Animation이 적용된 상대 Transform.
 	 */
 	void CreateClipTransform(UINT index);
+
+	void CreateComputeBuffer();
 private:
 
 	/*
@@ -154,5 +155,49 @@ private:
 	Matrix worlds[MAX_MODEL_INSTANCE];
 
 	VertexBuffer* instanceBuffer;
+
+
+
+private:
+	// compute shader로 입력될 구조체
+	struct CS_InputDesc
+	{
+		Matrix Bone;
+	};
+
+	struct CS_OutputDesc
+	{
+		Matrix Result;
+	};
+
+	struct AttachDesc
+	{
+		UINT BoneIndex = 40;
+		float Padding[3];
+	} attachDesc;
+
+private:
+	Shader* computeShader = nullptr;
+	StructuredBuffer* computeBuffer = nullptr;
+
+	CS_InputDesc*  csInput = nullptr;
+	CS_OutputDesc* csOutput = nullptr;
+
+	ID3DX11EffectShaderResourceVariable* sInputSRV;
+	ID3DX11EffectUnorderedAccessViewVariable* sOutputUAV;
+
+	ConstantBuffer* computeAttachBuffer = nullptr;
+
+	
+
+	ID3DX11EffectConstantBuffer* sComputeAttachBuffer;
+	ID3DX11EffectConstantBuffer* sComputeTweenBuffer;
+	ID3DX11EffectConstantBuffer* sComputeBlendBuffer;
+
+
+	;
+
+
+
 
 };

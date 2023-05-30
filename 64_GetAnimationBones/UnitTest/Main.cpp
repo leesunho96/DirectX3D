@@ -31,7 +31,9 @@
 //#include "Instancing/InstancingDemo.h"
 
 //#include "DirectCompute/RawBufferDemo.h"
-#include "DirectCompute/TextureBufferDemo.h"
+//#include "DirectCompute/TextureBufferDemo.h"
+#include "DirectCompute/GetAnimationBoneDemo.h"
+#include "Instancing/InstancingFrameworkDemo.h"
 void Main::Initialize()
 {
 	//Push(new Vertex_Line());
@@ -46,7 +48,8 @@ void Main::Initialize()
 	//Push(new ThreadDemo());s
 	//Push(new InstancingDemo());
 
-	Push(new TextureBufferDemo());
+	//Push(new GetAnimationBoneDemo());
+	Push(new InstancingFrameworkDemo());
 }
 
 void Main::Ready()
