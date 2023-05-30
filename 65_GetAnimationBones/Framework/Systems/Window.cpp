@@ -2,8 +2,8 @@
 #include "Window.h"
 #include "IExecute.h"
 
-#define THREADDIVIDEVERSION 1
-//#define THREADINTERGRATEDVERSION 2
+//#define THREADDIVIDEVERSION 1
+#define THREADINTERGRATEDVERSION 2
 
 IExecute* Window::mainExecute = NULL;
 
@@ -70,23 +70,23 @@ WPARAM Window::Run(IExecute* main)
 
 
 #ifndef THREADDIVIDEVERSION
-		//MSG msg = { 0 };
-	//while (true)
+	
+	while (true)
 
-	//{
-	//	if (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE))
-	//	{
-	//		if (msg.message == WM_QUIT)
-	//			break;
+	{
+		if (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE))
+		{
+			if (msg.message == WM_QUIT)
+				break;
 
-	//		TranslateMessage(&msg);
-	//		DispatchMessage(&msg);
-	//	}
-	//	else
-	//	{
-	//		MainRender();
-	//	}
-	//}
+			TranslateMessage(&msg);
+			DispatchMessage(&msg);
+		}
+		else
+		{
+			MainRender();
+		}
+	}
 
 #endif
 

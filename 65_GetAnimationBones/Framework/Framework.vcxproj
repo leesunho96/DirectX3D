@@ -189,6 +189,7 @@ copy /Y "$(SolutionDir)Debug\$(ProjectName).pdb" "$(SolutionDir)ModelEditor"</Co
     <ClCompile Include="Model\ModelClip.cpp" />
     <ClCompile Include="Model\ModelMesh.cpp" />
     <ClCompile Include="Model\ModelRender.cpp" />
+    <ClCompile Include="Objects\Collider.cpp" />
     <ClCompile Include="Renders\Buffers.cpp" />
     <ClCompile Include="Renders\Context.cpp" />
     <ClCompile Include="Renders\DebugLine.cpp" />
@@ -233,6 +234,7 @@ copy /Y "$(SolutionDir)Debug\$(ProjectName).pdb" "$(SolutionDir)ModelEditor"</Co
     <ClInclude Include="Model\ModelClip.h" />
     <ClInclude Include="Model\ModelMesh.h" />
     <ClInclude Include="Model\ModelRender.h" />
+    <ClInclude Include="Objects\Collider.h" />
     <ClInclude Include="Renders\Buffers.h" />
     <ClInclude Include="Renders\Context.h" />
     <ClInclude Include="Renders\DebugLine.h" />

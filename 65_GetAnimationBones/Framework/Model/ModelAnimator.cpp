@@ -6,8 +6,8 @@ ModelAnimator::ModelAnimator(Shader* shader)
 {
 	model = new Model();
 
-	frameBuffer = new ConstantBuffer(&tweenDesc, sizeof(TweenDesc) * MAX_MODEL_INSTANCE);
-	sFrameBuffer = shader->AsConstantBuffer("CB_TweenFrame");
+	tweenBuffer = new ConstantBuffer(&tweenDesc, sizeof(TweenDesc) * MAX_MODEL_INSTANCE);
+	sTweenBuffer = shader->AsConstantBuffer("CB_TweenFrame");
 
 	blendBuffer = new ConstantBuffer(&blendDesc, sizeof(BlendDesc) * MAX_MODEL_INSTANCE);
 	sBlendBuffer = shader->AsConstantBuffer("CB_BlendFrame");
@@ -38,7 +38,7 @@ ModelAnimator::~ModelAnimator()
 	SafeRelease(texture);
 	SafeRelease(srv);
 
-	SafeDelete(frameBuffer);
+	SafeDelete(tweenBuffer);
 	SafeDelete(blendBuffer);
 
 	SafeDelete(instanceBuffer);
@@ -55,20 +55,35 @@ ModelAnimator::~ModelAnimator()
 
 void ModelAnimator::Update()
 {
-	for (UINT i = 0; i < transforms.size(); i++)
-	{
-		if (blendDesc[i].Mode == 0)
-			UpdateTweenMode(i);
-		else
-			UpdateBlendMode(i);
-	}
-
 	if (texture == NULL)
 	{
 		for (ModelMesh* mesh : model->Meshes())
 			mesh->SetShader(shader);
 
 		CreateTexture();
+		CreateComputeBuffer();
+	}
+
+	for (UINT i = 0; i < transforms.size(); i++)
+	{
+		blendDesc[i].Mode == 0 ? UpdateTweenMode(i) : UpdateBlendMode(i);		
+	}
+
+	tweenBuffer->Render();
+	blendBuffer->Render();
+
+	if(computeBuffer!=NULL)
+	{
+		computeAttachBuffer->Render();
+		sComputeAttachBuffer->SetConstantBuffer(computeAttachBuffer->Buffer());
+		sComputeTweenBuffer->SetConstantBuffer(tweenBuffer->Buffer());
+		sComputeBlendBuffer->SetConstantBuffer(blendBuffer->Buffer());
+
+		sInputSRV->SetResource(computeBuffer->SRV());
+		sOutputUAV->SetUnorderedAccessView(computeBuffer->UAV());
+
+		computeShader->Dispatch(0, 0, 1, 1, 1);
+		computeBuffer->CopyFromOutput(csOutput);
 	}
 
 	for (ModelMesh* mesh : model->Meshes())
@@ -156,11 +171,8 @@ void ModelAnimator::UpdateBlendMode(UINT index)
 }
 
 void ModelAnimator::Render()
-{
-	frameBuffer->Render();
-	sFrameBuffer->SetConstantBuffer(frameBuffer->Buffer());
-
-	blendBuffer->Render();
+{	
+	sTweenBuffer->SetConstantBuffer(tweenBuffer->Buffer());
 	sBlendBuffer->SetConstantBuffer(blendBuffer->Buffer());
 
 	instanceBuffer->Render();
@@ -237,6 +249,28 @@ void ModelAnimator::SetBlendAlpha(UINT index, float alpha)
 	alpha = Math::Clamp(alpha, 0.0f, 2.0f);
 
 	blendDesc[index].Alpha = alpha;
+}
+
+void ModelAnimator::SetAttachTransform(UINT boneIndex)
+{
+	attachDesc.BoneIndex = boneIndex;
+}
+
+void ModelAnimator::GetAttachTransform(UINT instance, Matrix* outResult)
+{
+	if (csOutput == NULL)
+	{
+		D3DXMatrixIdentity(outResult);
+
+		return;
+	}
+
+
+	Matrix transform = model->BoneByIndex(attachDesc.BoneIndex)->Transform(); //기준 본 행렬
+	Matrix result = csOutput[instance].Result; //애니메이션 행렬
+	Matrix world = GetTransform(instance)->World();
+
+	*outResult = transform * result * world;
 }
 
 
@@ -410,13 +444,13 @@ void ModelAnimator::CreateClipTransform(UINT index)
 void ModelAnimator::CreateComputeBuffer()
 {
 	UINT clipCount = model->ClipCount();
-	UINT inSize = clipCount * MAX_MODEL_KEYFRAMES *MAX_MODEL_TRANSFORMS;
+	UINT inSize = clipCount * MAX_MODEL_KEYFRAMES * MAX_MODEL_TRANSFORMS;
 	UINT outSize = MAX_MODEL_INSTANCE;
 
 	csInput = new CS_InputDesc[inSize];
 
-	UINT count = 0;
 
+	UINT count = 0;
 	for (UINT clipIndex = 0; clipIndex < clipCount; clipIndex++)
 	{
 		for (UINT frameIndex = 0; frameIndex < MAX_MODEL_KEYFRAMES; frameIndex++)
@@ -424,17 +458,17 @@ void ModelAnimator::CreateComputeBuffer()
 			for (UINT boneIndex = 0; boneIndex < MAX_MODEL_TRANSFORMS; boneIndex++)
 			{
 				csInput[count].Bone = clipTransforms[clipIndex].Transform[frameIndex][boneIndex];
-				count++;
-			} // for boneIndex
-		} // for frameIndex
-	}// clipIndex
 
-	computeBuffer = new StructuredBuffer(csInput, sizeof(CS_InputDesc), sizeof(CS_OutputDesc), outSize);
+				count++;
+			}
+		}//for(frameIndex)
+	}//for(clipIndex)
+
+
+	computeBuffer = new StructuredBuffer(csInput, sizeof(CS_InputDesc), inSize, sizeof(CS_OutputDesc), outSize);
 
 	csOutput = new CS_OutputDesc[outSize];
 
 	for (UINT i = 0; i < outSize; i++)
-	{
 		D3DXMatrixIdentity(&csOutput[i].Result);
-	}
 }

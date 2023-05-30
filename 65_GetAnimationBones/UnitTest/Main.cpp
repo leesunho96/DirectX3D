@@ -49,7 +49,8 @@ void Main::Initialize()
 	//Push(new InstancingDemo());
 
 	//Push(new GetAnimationBoneDemo());
-	Push(new InstancingFrameworkDemo());
+	//Push(new InstancingFrameworkDemo());
+	Push(new GetAnimationBoneDemo);
 }
 
 void Main::Ready()

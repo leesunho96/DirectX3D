@@ -14,6 +14,7 @@ void GetAnimationBoneDemo::Initialize()
 	Mesh();
 	Airplane();
 	Kachujin();
+	KachujinCollider();
 }
 
 void GetAnimationBoneDemo::Update()
@@ -27,6 +28,15 @@ void GetAnimationBoneDemo::Update()
 
 	airplane->Update();
 	kachujin->Update();
+
+	for (UINT i = 0; i < kachujin->GetTransformCount(); i++)
+	{
+		Matrix attach;
+		kachujin->GetAttachTransform(i, &attach);
+
+		colliders[i]->Collider->GetTransform()->World(attach);
+		colliders[i]->Collider->Update();
+	}
 }
 
 void GetAnimationBoneDemo::Render()
@@ -49,7 +59,12 @@ void GetAnimationBoneDemo::Render()
 	grid->Render();
 
 	airplane->Render();
+
 	kachujin->Render();
+
+
+	for (UINT i = 0; i < kachujin->GetTransformCount(); i++)
+		colliders[i]->Collider->Render();
 }
 
 void GetAnimationBoneDemo::Mesh()
@@ -184,8 +199,27 @@ void GetAnimationBoneDemo::Kachujin()
 	kachujin->PlayTweenMode(4, 4, 0.75f);
 
 	kachujin->UpdateTransforms();
+	kachujin->SetAttachTransform(40);
 
 	animators.push_back(kachujin);
+}
+
+void GetAnimationBoneDemo::KachujinCollider()
+{
+	UINT count = kachujin->GetTransformCount();
+	colliders = new  ColliderObject * [count];
+
+	for (UINT i = 0; i < count; i++)
+	{
+		colliders[i] = new ColliderObject();
+
+		colliders[i]->Init = new Transform();
+		colliders[i]->Init->Position(0, 0, 0);
+		colliders[i]->Init->Scale(10, 30, 10);
+
+		colliders[i]->Transform = new Transform();
+		colliders[i]->Collider = new Collider(colliders[i]->Transform, colliders[i]->Init);
+	}
 }
 
 void GetAnimationBoneDemo::Pass(UINT mesh, UINT model, UINT anim)
