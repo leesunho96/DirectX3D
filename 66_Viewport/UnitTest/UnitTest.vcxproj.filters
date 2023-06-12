@@ -84,6 +84,9 @@
     <ClCompile Include="Instancing\InstancingFrameworkDemo.cpp">
       <Filter>Instancing</Filter>
     </ClCompile>
+    <ClCompile Include="Projection\ViewportDemo.cpp">
+      <Filter>Projection</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h" />
@@ -169,6 +172,9 @@
     <ClInclude Include="Instancing\InstancingFrameworkDemo.h">
       <Filter>Instancing</Filter>
     </ClInclude>
+    <ClInclude Include="Projection\ViewportDemo.h">
+      <Filter>Projection</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Vertex">
@@ -191,6 +197,9 @@
     </Filter>
     <Filter Include="DirectCompute">
       <UniqueIdentifier>{fbba5400-c6de-4491-99e8-93136dc94bd2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Projection">
+      <UniqueIdentifier>{be9d496a-abc5-4a32-9227-4b9f2f5ed2dd}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

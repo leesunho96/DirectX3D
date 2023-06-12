@@ -32,8 +32,10 @@
 
 //#include "DirectCompute/RawBufferDemo.h"
 //#include "DirectCompute/TextureBufferDemo.h"
-#include "DirectCompute/GetAnimationBoneDemo.h"
-#include "Instancing/InstancingFrameworkDemo.h"
+//#include "DirectCompute/GetAnimationBoneDemo.h"
+//#include "Instancing/InstancingFrameworkDemo.h"
+
+#include "Projection/ViewportDemo.h"
 void Main::Initialize()
 {
 	//Push(new Vertex_Line());
@@ -50,7 +52,7 @@ void Main::Initialize()
 
 	//Push(new GetAnimationBoneDemo());
 	//Push(new InstancingFrameworkDemo());
-	Push(new GetAnimationBoneDemo);
+	Push(new ViewportDemo());
 }
 
 void Main::Ready()
