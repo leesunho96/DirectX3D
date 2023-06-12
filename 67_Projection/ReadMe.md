@@ -1,32 +1,30 @@
-# Chap 66 Viewport
+# Chap 67 Projection
 
-- 3D공간 → 2D 공간
-    - In Rendering Pipeline
-        - IA→VS→RS→PS→OM
-    - VS : 정점 처리. W, V, P 처리.
-    - RS : ViewPort 변환.
-    - 3D 위치 :  W(World) → V(View) → P(Projection)
-        - W : 직육면체 공간.
-        - V → P
-            - 원근 좌표계(Perspective) : 절두체 공간
-                - World 공간의 앞면 : 축소.
-                - World 공간의 뒷면 : 확대
-            - 직교 좌표계(Orthogrphy) : 직육면체 공간
-                - 크기 변화 X
-            - 시야에 따라 공간이 설정됨.
-            - Projection 완료 후에는 깊이가 남아있는 2D공간으로 이해.
+- 3D → 2D 공간.
+    - W → V → P 한단계 씩 진행하는 방식이 아닌, W * V * P를 매개변수로 할당하여 한번에 진행하는것이 속도 빠름.
+        - Transform * W * V * P (X)
+        - Transform * (W * V * P) (O)
+    - 화면 해상도 (1280, 720) 가정.
+        - NDC 공간 : X(-1 ~ 1), Y(-1 ~ 1)
+        - DX2D 공간 : X(-640 ~ 640), Y(-360 ~ 360)
         
-    - Viewport공간(Rasterizer) : 직육면체 공간.
-        - 원근 좌표계
-            - 절두체 공간의 앞면 : 확대
-            - 절두체 공간의 뒷면 : 축소.
-        - 직교 좌표계 : 크기 변화 X
-        - 정점들의 위치가 NDC 공간으로 변환.(-1, 1)
-        - RS 종료시 완전한 2D공간으로 변환, Rendering Pipeline에 의해 결정됨.
-        - 절두체 공간을 어떠한 크기로, 어떠한 깊이로 보여 줄 지 결정하는 것이 Viewport
-        - Viewport의 깊이는 0~1의 범위로 구성
-            - 0은 사용하지 않는다. 내부에 / 연산이 존재.
-        - FOV : Field Of View.
-            - 시야각.
-                - 커질수록 화면 축소
-                - 작아질 수록 화면 확대.
+        ```cpp
+        void Viewport::Project
+        (
+        	Vector3* pOutput, 
+        	Vector3& source, 
+        	const Matrix& W, const Matrix& V, const Matrix& P
+        )
+        {
+        	Vector3 position = source;
+        	Matrix wvp = W * V * P;
+        
+        	// Position을 WVP 적용한 값으로 변환하여 pOutput에 저장.
+        	// 반환된 값은 NDC 공간 값(화면 전체의 NDC 공간 값).
+        	D3DXVec3TransformCoord(pOutput, &position, &wvp);
+        
+        	pOutput->x = ((pOutput->x + 1.0f) * 0.5f) * width + x;
+        	pOutput->y = ((- pOutput->y + 1.0f) * 0.5f) * height + y;
+        	pOutput->z = (pOutput->Z * (maxDepth - minDepth)) + minDepth;
+        }
+        ```
