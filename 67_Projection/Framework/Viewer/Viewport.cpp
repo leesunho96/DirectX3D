@@ -39,5 +39,5 @@ void Viewport::Project(Vector3* pOutput, Vector3& source, const Matrix& W, const
 
 	pOutput->x = ((pOutput->x + 1.0f) * 0.5f) * width + x;
 	pOutput->y = ((- pOutput->y + 1.0f) * 0.5f) * height + y;
-
+	pOutput->z = ((pOutput->z) * (maxDepth - minDepth)) + minDepth;
 }
