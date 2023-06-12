@@ -1,37 +1,32 @@
-# Chap 63 GetBoneTransform
+# Chap 66 Viewport
 
-- StructuredBuffer
-    - uint inputStride : 입력 구조체의 크기
-    - uint inputCount : 입력 구조체의 개수.
-    - uint outputStride : 출력 구조체의 크기.
-    - uint outputCount : 출력 구조체의 크기.
-
-- outputStride or outputCount == 0
-    - inputStride/Count와 동일하게 설정.
-- inputDesc.MiscFlag = D3D11_RESOURCE_MISC_BUFFER_STRUCTURED
-- inputDesc.Usage = D3D11_USAGE_DYNAMIC
-
-- Thread Group
-    - Dispatch메소드에 의해 개수 정해짐.
-        - shader→dispatch(x, y, z); x*y*z개의 threadGroup 생성.
-        - 1개의 ThreadGroup당 Thread개수 : shader의 [numthread(x1, y1, z1)]에 의해 결정.
-            - 1개의 threadgroup당 x1*y1*z1개의 thread 생성
-    - SV_GroupID : Dispatch된 Thread Group의 ID.
-    - SV_GroupThreadID: Thread Group내에서의 ID. numthread 번호.
-        - eg. numthread(10, 8, 1)에서의 번호.
-            - (5, 3, 1)의 형태로 사용.
-    - SV_GroupIndex : 해당 ThreadGroup에서 몇번째 Thread인지.
-        - SV_GroupID = (2, 1, 0)
-        - SV_GroupThreadID= (7, 5, 0)
-        - numthread(10, 8, 3)
-            
-            ```glsl
-            SV_GroupIndex = numthread.x(10) * numthread.y(8) * GroupThreadID.z + 
-            								numthread.x(10) * GroupThreadID.y +
-            								GroupThreadID.x;
-            ```
-            
-    - SV_DispatchedThreadID =  ThreadGroup 전체에서 몇번째 GroupThreadID인지.
-        - SV_DIspatchedThreadID = SV_GroupID * numthread(x, y, z) + SV_GroupThreadID;
+- 3D공간 → 2D 공간
+    - In Rendering Pipeline
+        - IA→VS→RS→PS→OM
+    - VS : 정점 처리. W, V, P 처리.
+    - RS : ViewPort 변환.
+    - 3D 위치 :  W(World) → V(View) → P(Projection)
+        - W : 직육면체 공간.
+        - V → P
+            - 원근 좌표계(Perspective) : 절두체 공간
+                - World 공간의 앞면 : 축소.
+                - World 공간의 뒷면 : 확대
+            - 직교 좌표계(Orthogrphy) : 직육면체 공간
+                - 크기 변화 X
+            - 시야에 따라 공간이 설정됨.
+            - Projection 완료 후에는 깊이가 남아있는 2D공간으로 이해.
         
-        ![threadgroupids.png](ReadMe/threadgroupids.png)
+    - Viewport공간(Rasterizer) : 직육면체 공간.
+        - 원근 좌표계
+            - 절두체 공간의 앞면 : 확대
+            - 절두체 공간의 뒷면 : 축소.
+        - 직교 좌표계 : 크기 변화 X
+        - 정점들의 위치가 NDC 공간으로 변환.(-1, 1)
+        - RS 종료시 완전한 2D공간으로 변환, Rendering Pipeline에 의해 결정됨.
+        - 절두체 공간을 어떠한 크기로, 어떠한 깊이로 보여 줄 지 결정하는 것이 Viewport
+        - Viewport의 깊이는 0~1의 범위로 구성
+            - 0은 사용하지 않는다. 내부에 / 연산이 존재.
+        - FOV : Field Of View.
+            - 시야각.
+                - 커질수록 화면 축소
+                - 작아질 수록 화면 확대.
