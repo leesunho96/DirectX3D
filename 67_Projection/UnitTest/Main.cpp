@@ -35,7 +35,8 @@
 //#include "DirectCompute/GetAnimationBoneDemo.h"
 //#include "Instancing/InstancingFrameworkDemo.h"
 
-#include "Projection/ViewportDemo.h"
+//#include "Projection/ViewportDemo.h"
+#include "Projection/ProjectionDemo.h"
 void Main::Initialize()
 {
 	//Push(new Vertex_Line());
@@ -52,7 +53,7 @@ void Main::Initialize()
 
 	//Push(new GetAnimationBoneDemo());
 	//Push(new InstancingFrameworkDemo());
-	Push(new ViewportDemo());
+	Push(new ProjectionDemo());
 }
 
 void Main::Ready()

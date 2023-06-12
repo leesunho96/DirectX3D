@@ -156,6 +156,7 @@
     <ClCompile Include="Mesh\CubeDemo.cpp" />
     <ClCompile Include="Mesh\MeshDemo.cpp" />
     <ClCompile Include="Objects\CubeSkyDemo.cpp" />
+    <ClCompile Include="Projection\ProjectionDemo.cpp" />
     <ClCompile Include="Projection\ViewportDemo.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
@@ -190,6 +191,7 @@
     <ClInclude Include="Mesh\CubeDemo.h" />
     <ClInclude Include="Mesh\MeshDemo.h" />
     <ClInclude Include="Objects\CubeSkyDemo.h" />
+    <ClInclude Include="Projection\ProjectionDemo.h" />
     <ClInclude Include="Projection\ViewportDemo.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="Terrain\GetHeightDemo.h" />

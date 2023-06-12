@@ -12,6 +12,8 @@ public:
 	float GetWidth() { return width; }
 	float GetHeight() { return height; }
 
+
+	void Project(Vector3* pOutput, Vector3& source, const Matrix& W, const Matrix& V, const Matrix& P);
 private:
 	float x, y;
 	float width, height;

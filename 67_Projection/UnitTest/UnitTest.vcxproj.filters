@@ -87,6 +87,9 @@
     <ClCompile Include="Projection\ViewportDemo.cpp">
       <Filter>Projection</Filter>
     </ClCompile>
+    <ClCompile Include="Projection\ProjectionDemo.cpp">
+      <Filter>Projection</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h" />
@@ -173,6 +176,9 @@
       <Filter>Instancing</Filter>
     </ClInclude>
     <ClInclude Include="Projection\ViewportDemo.h">
+      <Filter>Projection</Filter>
+    </ClInclude>
+    <ClInclude Include="Projection\ProjectionDemo.h">
       <Filter>Projection</Filter>
     </ClInclude>
   </ItemGroup>
